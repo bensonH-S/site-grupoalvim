@@ -1,25 +1,57 @@
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 const nodemailer = require("nodemailer");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const rootDir = __dirname;
 const assetsDir = path.join(rootDir, "assets");
+const indexPath = path.join(rootDir, "index.html");
+const customCssPath = path.join(assetsDir, "site-custom.css");
 
 app.disable("x-powered-by");
 app.use(express.json({ limit: "32kb" }));
 
+function loadIndexHtml() {
+  let html = fs.readFileSync(indexPath, "utf8");
+
+  if (fs.existsSync(customCssPath)) {
+    const css = fs.readFileSync(customCssPath, "utf8");
+    const inline = `<style id="site-custom-inline">\n${css}\n</style>`;
+    html = html.replace("<!--SITE_CUSTOM_CSS-->", inline);
+  } else {
+    html = html.replace("<!--SITE_CUSTOM_CSS-->", "");
+  }
+
+  return html;
+}
+
+let cachedIndexHtml = loadIndexHtml();
+
+function serveIndex(_req, res) {
+  if (process.env.NODE_ENV !== "production") {
+    cachedIndexHtml = loadIndexHtml();
+  }
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+  res.type("html").send(cachedIndexHtml);
+}
+
 app.use(
   "/assets",
   express.static(assetsDir, {
-    maxAge: process.env.NODE_ENV === "production" ? "7d" : 0,
+    maxAge: process.env.NODE_ENV === "production" ? "1h" : 0,
     setHeaders(res, filePath) {
-      if (filePath.endsWith(".css") || filePath.endsWith(".js")) {
-        res.setHeader("Content-Type", filePath.endsWith(".css")
-          ? "text/css; charset=utf-8"
-          : "application/javascript; charset=utf-8");
+      if (filePath.endsWith(".css")) {
+        res.setHeader("Content-Type", "text/css; charset=utf-8");
+        if (filePath.endsWith("site-custom.css")) {
+          res.setHeader("Cache-Control", "no-cache");
+        }
+      } else if (filePath.endsWith(".js")) {
+        res.setHeader("Content-Type", "application/javascript; charset=utf-8");
       }
     },
   })
@@ -112,17 +144,11 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-app.get("/", (_req, res) => {
-  res.sendFile(path.join(rootDir, "index.html"));
-});
+app.get("/", serveIndex);
 
-app.get("/sobre", (_req, res) => {
-  res.sendFile(path.join(rootDir, "index.html"));
-});
+app.get("/sobre", serveIndex);
 
-app.get("/franqueado", (_req, res) => {
-  res.sendFile(path.join(rootDir, "index.html"));
-});
+app.get("/franqueado", serveIndex);
 
 app.listen(PORT, () => {
   console.log(`Servidor em http://localhost:${PORT}`);

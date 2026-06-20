@@ -120,88 +120,7 @@
   text-decoration: underline;
 }
 
-#cookie-banner {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9999;
-  padding: 1rem 1.25rem;
-  background: hsl(0 0% 100%);
-  border-top: 1px solid hsl(0 0% 90%);
-  box-shadow: 0 -8px 32px hsl(0 0% 0% / 0.08);
-  transition: transform 0.35s ease, opacity 0.35s ease;
-}
-
-#cookie-banner.cookie-banner--hide {
-  transform: translateY(110%);
-  opacity: 0;
-}
-
-.cookie-banner__inner {
-  max-width: 72rem;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.cookie-banner__text {
-  flex: 1 1 18rem;
-  margin: 0;
-  font-size: 0.8125rem;
-  line-height: 1.55;
-  color: hsl(0 0% 30%);
-}
-
-.cookie-banner__text a {
-  color: hsl(25 95% 45%);
-  font-weight: 500;
-}
-
-.cookie-banner__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.cookie-banner__btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.55rem 1.1rem;
-  border-radius: 9999px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  border: none;
-  font-family: inherit;
-}
-
-.cookie-banner__btn--primary {
-  background: hsl(25 95% 53%);
-  color: white;
-}
-
-.cookie-banner__btn--primary:hover {
-  background: hsl(25 95% 48%);
-}
-
-.cookie-banner__btn--ghost {
-  background: transparent;
-  color: hsl(0 0% 35%);
-  border: 1px solid hsl(0 0% 85%);
-}
-
-.cookie-banner__btn--ghost:hover {
-  border-color: hsl(25 95% 53%);
-  color: hsl(25 95% 45%);
-}
-
-/* xs — mobile (≤767px) */
+/* Cookie banner — ver assets/cookies.css (incluido no site-custom.css da home) */
 @media (max-width: 767px) {
   .legal-header {
     padding: 0.55rem 0.85rem;
@@ -272,35 +191,6 @@
 
   .legal-footer p {
     margin: 0.25rem 0;
-  }
-
-  #cookie-banner {
-    padding: 0.75rem 0.85rem;
-    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0));
-  }
-
-  .cookie-banner__inner {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.65rem;
-  }
-
-  .cookie-banner__text {
-    flex: none;
-    font-size: 0.6875rem;
-    line-height: 1.45;
-  }
-
-  .cookie-banner__actions {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .cookie-banner__btn {
-    width: 100%;
-    min-height: 2.35rem;
-    font-size: 0.6875rem;
-    padding: 0.45rem 0.75rem;
   }
 }
 

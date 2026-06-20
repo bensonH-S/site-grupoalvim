@@ -6,6 +6,7 @@ const sources = [
   "responsive.css",
   "typography-responsive.css",
   "overrides.css",
+  "cookies.css",
 ];
 const output = path.join(assetsDir, "site-custom.css");
 
