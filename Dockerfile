@@ -5,12 +5,16 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
 
-COPY server.js ./
-COPY scripts/bundle-css.js ./scripts/
-COPY index.html termos.html privacidade.html ./
-COPY assets ./assets/
+COPY . .
 
-RUN npm run build:css
+# Gera CSS ou usa o site-custom.css ja commitado na tag
+RUN if [ -f scripts/bundle-css.js ]; then \
+      node scripts/bundle-css.js; \
+    elif [ -s assets/site-custom.css ]; then \
+      echo "Usando assets/site-custom.css"; \
+    else \
+      echo "ERRO: assets/site-custom.css ausente" && exit 1; \
+    fi
 
 ENV NODE_ENV=production
 ENV PORT=3006

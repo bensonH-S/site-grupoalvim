@@ -1,81 +1,132 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/bash
+set -e
 
-# Deploy do site Grupo Alvim em container Docker
-# Produção: https://www.grupoalvim.com.br (porta 3006)
-
-IMAGE_NAME="grupoalvim/site"
-CONTAINER_NAME="site-grupoalvim"
-HOST_PORT="3006"
-CONTAINER_PORT="3006"
-SITE_URL="https://www.grupoalvim.com.br"
-ENV_FILE=".env"
+# Deploy por TAG â€” mesmo padrao do freecontrol
+# Porta: 3006 | Container: site-grupoalvim
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-log() {
-  echo "[deploy] $*"
-}
+CONTAINER_NAME="${CONTAINER_NAME:-site-grupoalvim}"
+IMAGE_NAME="${IMAGE_NAME:-grupoalvim/site}"
+APP_PORT="3006"
+DEPLOY_DIR="/var/www/app/.site-grupoalvim-deploy"
 
-fail() {
-  echo "[deploy] ERRO: $*" >&2
-  exit 1
-}
-
-command -v docker >/dev/null 2>&1 || fail "Docker não encontrado. Instale o Docker antes de continuar."
-
-if [[ ! -f "$ENV_FILE" ]]; then
-  fail "Arquivo $ENV_FILE não encontrado. Copie .env.example para .env e configure as credenciais SMTP."
+if [ -f .env ] && grep -qE '^PORT=' .env; then
+  APP_PORT="$(grep -E '^PORT=' .env | head -1 | cut -d= -f2- | tr -d '[:space:]"')"
 fi
 
-log "Diretório: $SCRIPT_DIR"
-log "Site: $SITE_URL"
-log "Porta: $HOST_PORT"
+mkdir -p "$DEPLOY_DIR"
+cp -f deploy.sh Dockerfile .dockerignore "$DEPLOY_DIR/" 2>/dev/null || true
 
-if [[ -d .git ]]; then
-  log "Atualizando código (git pull)..."
-  git pull --ff-only
-fi
+echo ""
+echo "====================================="
+echo " Deploy Site Grupo Alvim (por TAG)"
+echo " Porta: ${APP_PORT}"
+echo "====================================="
+echo ""
 
-log "Construindo imagem Docker: $IMAGE_NAME"
-docker build -t "$IMAGE_NAME:latest" .
+echo "Atualizando tags..."
+git fetch --tags
 
-if docker ps -a --format '{{.Names}}' | grep -qx "$CONTAINER_NAME"; then
-  log "Parando container existente: $CONTAINER_NAME"
-  docker stop "$CONTAINER_NAME" >/dev/null 2>&1 || true
-  docker rm "$CONTAINER_NAME" >/dev/null 2>&1 || true
-fi
+LATEST_TAG=$(git tag --sort=v:refname | tail -n 1)
 
-log "Iniciando container: $CONTAINER_NAME"
-docker run -d \
-  --name "$CONTAINER_NAME" \
-  --restart unless-stopped \
-  -p "${HOST_PORT}:${CONTAINER_PORT}" \
-  --env-file "$ENV_FILE" \
-  -e NODE_ENV=production \
-  -e PORT="$CONTAINER_PORT" \
-  "$IMAGE_NAME:latest"
+echo ""
+echo "Ultima versao disponivel: ${LATEST_TAG}"
+echo ""
+echo "Tags disponiveis:"
+git tag --sort=v:refname -n
 
-log "Aguardando aplicação responder..."
-for i in $(seq 1 15); do
-  if curl -fsS "http://127.0.0.1:${HOST_PORT}/" >/dev/null 2>&1; then
-    CSS_URL="http://127.0.0.1:${HOST_PORT}/assets/site-custom.css"
-    CSS_SIZE=$(curl -fsS "$CSS_URL" 2>/dev/null | wc -c | tr -d ' ')
-    if [[ -z "$CSS_SIZE" || "$CSS_SIZE" -lt 10000 ]]; then
-      fail "CSS customizado não carregou ($CSS_URL — ${CSS_SIZE:-0} bytes). Rode: npm run build:css && ./deploy.sh"
+echo ""
+
+if [ -n "${TAG:-}" ]; then
+  echo "Tag informada via variavel: ${TAG}"
+else
+  while true; do
+    read -r -p "Digite a tag para deploy (ex: ${LATEST_TAG}): " TAG
+
+    if [ -z "$TAG" ]; then
+      echo "Nenhuma tag informada!"
+      echo ""
+      continue
     fi
-    log "CSS customizado OK (${CSS_SIZE} bytes)"
-    log "Aplicação online em http://127.0.0.1:${HOST_PORT}"
-    log "Nginx: location / -> localhost:${HOST_PORT} (ver deploy/nginx-grupoalvim-snippet.conf)"
-    log "Mantenha /freelancers, /api e /uploads apontando para 127.0.0.1:3004 ANTES de location /"
+
+    if git rev-parse "refs/tags/$TAG" >/dev/null 2>&1; then
+      break
+    fi
+
+    echo ""
+    echo "A versao ${TAG} nao existe!"
+    echo ""
+    echo "Tags disponiveis:"
+    git tag --sort=v:refname -n
+    echo ""
+  done
+fi
+
+if ! git rev-parse "refs/tags/$TAG" >/dev/null 2>&1; then
+  echo "ERRO: tag invalida: ${TAG}"
+  exit 1
+fi
+
+echo ""
+echo "Iniciando deploy da versao: ${TAG}"
+echo "(detached HEAD e normal ao fazer deploy por tag)"
+echo ""
+
+git -c advice.detachedHead=false checkout "tags/${TAG}" -f
+
+# Usa Dockerfile/.dockerignore atuais (tags antigas tinham Dockerfile quebrado)
+if [ -f "$DEPLOY_DIR/Dockerfile" ]; then
+  cp -f "$DEPLOY_DIR/Dockerfile" "$DEPLOY_DIR/.dockerignore" "$SCRIPT_DIR/"
+fi
+cp -f "$DEPLOY_DIR/deploy.sh" "$SCRIPT_DIR/deploy.sh" 2>/dev/null || true
+chmod +x "$SCRIPT_DIR/deploy.sh" 2>/dev/null || true
+
+if [ ! -f .env ]; then
+  echo "ERRO: .env nao encontrado em ${SCRIPT_DIR}"
+  exit 1
+fi
+
+echo ""
+echo "Build Docker..."
+
+docker stop "${CONTAINER_NAME}" 2>/dev/null || true
+docker rm "${CONTAINER_NAME}" 2>/dev/null || true
+
+docker build --no-cache -t "${IMAGE_NAME}:${TAG}" -t "${IMAGE_NAME}:latest" .
+
+docker run -d \
+  -p "${APP_PORT}:${APP_PORT}" \
+  -e "PORT=${APP_PORT}" \
+  -e "NODE_ENV=production" \
+  --env-file .env \
+  --name "${CONTAINER_NAME}" \
+  --restart unless-stopped \
+  "${IMAGE_NAME}:${TAG}"
+
+echo ""
+echo "Aguardando aplicacao..."
+
+for i in $(seq 1 15); do
+  if curl -fsS "http://127.0.0.1:${APP_PORT}/" >/dev/null 2>&1; then
+    echo ""
+    echo "====================================="
+    echo " Deploy concluido com sucesso!"
+    echo " Versao: ${TAG}"
+    echo " Porta:  ${APP_PORT}"
+    echo " URL:    https://www.grupoalvim.com.br"
+    echo "====================================="
     docker ps --filter "name=${CONTAINER_NAME}" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+    echo ""
+    echo "Reiniciando nginx..."
+    sudo systemctl restart nginx 2>/dev/null || sudo systemctl reload nginx 2>/dev/null || true
     exit 0
   fi
   sleep 2
 done
 
-log "Container iniciado, mas o health check não respondeu a tempo."
-log "Verifique os logs: docker logs -f $CONTAINER_NAME"
-docker ps --filter "name=${CONTAINER_NAME}" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+echo ""
+echo "ERRO: aplicacao nao respondeu na porta ${APP_PORT}"
+docker logs --tail 30 "${CONTAINER_NAME}" 2>&1 || true
 exit 1
