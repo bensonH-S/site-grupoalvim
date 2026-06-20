@@ -60,8 +60,15 @@ docker run -d \
 log "Aguardando aplicação responder..."
 for i in $(seq 1 15); do
   if curl -fsS "http://127.0.0.1:${HOST_PORT}/" >/dev/null 2>&1; then
+    CSS_URL="http://127.0.0.1:${HOST_PORT}/assets/site-custom.css"
+    CSS_SIZE=$(curl -fsS "$CSS_URL" 2>/dev/null | wc -c | tr -d ' ')
+    if [[ -z "$CSS_SIZE" || "$CSS_SIZE" -lt 10000 ]]; then
+      fail "CSS customizado não carregou ($CSS_URL — ${CSS_SIZE:-0} bytes). Rode: npm run build:css && ./deploy.sh"
+    fi
+    log "CSS customizado OK (${CSS_SIZE} bytes)"
     log "Aplicação online em http://127.0.0.1:${HOST_PORT}"
-    log "Configure o proxy reverso (Nginx/Caddy) para apontar $SITE_URL -> localhost:${HOST_PORT}"
+    log "Nginx: location / -> localhost:${HOST_PORT} (ver deploy/nginx-grupoalvim-snippet.conf)"
+    log "Mantenha /freelancers, /api e /uploads apontando para 127.0.0.1:3004 ANTES de location /"
     docker ps --filter "name=${CONTAINER_NAME}" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
     exit 0
   fi

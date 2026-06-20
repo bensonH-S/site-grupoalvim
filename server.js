@@ -5,9 +5,37 @@ const nodemailer = require("nodemailer");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const rootDir = __dirname;
+const assetsDir = path.join(rootDir, "assets");
 
+app.disable("x-powered-by");
 app.use(express.json({ limit: "32kb" }));
-app.use(express.static(path.join(__dirname), { extensions: ["html"] }));
+
+app.use(
+  "/assets",
+  express.static(assetsDir, {
+    maxAge: process.env.NODE_ENV === "production" ? "7d" : 0,
+    setHeaders(res, filePath) {
+      if (filePath.endsWith(".css") || filePath.endsWith(".js")) {
+        res.setHeader("Content-Type", filePath.endsWith(".css")
+          ? "text/css; charset=utf-8"
+          : "application/javascript; charset=utf-8");
+      }
+    },
+  })
+);
+
+app.use(
+  express.static(rootDir, {
+    extensions: ["html"],
+    index: false,
+    setHeaders(res, filePath) {
+      if (filePath.endsWith(".html")) {
+        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+      }
+    },
+  })
+);
 
 function requiredEnv(name) {
   const value = process.env[name];
@@ -84,12 +112,16 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
+app.get("/", (_req, res) => {
+  res.sendFile(path.join(rootDir, "index.html"));
+});
+
 app.get("/sobre", (_req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(rootDir, "index.html"));
 });
 
 app.get("/franqueado", (_req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(rootDir, "index.html"));
 });
 
 app.listen(PORT, () => {

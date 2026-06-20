@@ -2,8 +2,10 @@
   "name": "site-grupoalvim",
   "private": true,
   "scripts": {
+    "build:css": "node scripts/bundle-css.js",
+    "prestart": "npm run build:css",
     "start": "node server.js",
-    "dev": "node server.js",
+    "dev": "npm run build:css && node server.js",
     "patch": "node scripts/apply-patches.js"
   },
   "dependencies": {
