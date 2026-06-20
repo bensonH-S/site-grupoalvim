@@ -38,7 +38,7 @@ remove_container() {
 }
 
 reload_nginx() {
-  # Opcional â€” so se voce alterou o nginx. Com grupoalvim.conf ja configurado, nao precisa.
+  # Opcional Ã¢â‚¬â€ so se voce alterou o nginx. Com grupoalvim.conf ja configurado, nao precisa.
   if [ "${NGINX_RELOAD:-0}" = "1" ]; then
     if command -v systemctl >/dev/null 2>&1 && systemctl is-active --quiet nginx 2>/dev/null; then
       log "Reload nginx (NGINX_RELOAD=1)..."
@@ -48,14 +48,14 @@ reload_nginx() {
 }
 
 load_tags() {
-  mapfile -t TAG_NAMES < <(git tag --sort=-v:refname)
-  mapfile -t TAG_MESSAGES < <(git for-each-ref refs/tags --sort=-v:refname --format='%(subject)')
+  mapfile -t TAG_NAMES < <(git tag --sort=v:refname)
+  mapfile -t TAG_MESSAGES < <(git for-each-ref refs/tags --sort=v:refname --format='%(subject)')
 }
 
 show_tags() {
   local i=0
   echo ""
-  echo "Tags disponiveis (0 = mais recente):"
+  echo "Tags disponiveis (ordem crescente):"
   while [ "$i" -lt "${#TAG_NAMES[@]}" ]; do
     local msg="${TAG_MESSAGES[$i]:-(sem descricao)}"
     printf "  [%s] %s - %s\n" "$i" "${TAG_NAMES[$i]}" "$msg"
@@ -84,8 +84,9 @@ if [ "${#TAG_NAMES[@]}" -eq 0 ]; then
   exit 1
 fi
 
-LATEST_TAG="${TAG_NAMES[0]}"
-LATEST_MSG="${TAG_MESSAGES[0]:-(sem descricao)}"
+LATEST_INDEX=$((${#TAG_NAMES[@]} - 1))
+LATEST_TAG="${TAG_NAMES[$LATEST_INDEX]}"
+LATEST_MSG="${TAG_MESSAGES[$LATEST_INDEX]:-(sem descricao)}"
 
 echo ""
 log "Ultima versao: ${LATEST_TAG} - ${LATEST_MSG}"
@@ -95,10 +96,10 @@ if [ -n "${TAG:-}" ]; then
   log "Tag informada via variavel: ${TAG}"
 else
   while true; do
-    read -r -p "Digite o numero [0] ou a tag (ex: ${LATEST_TAG}): " INPUT
+    read -r -p "Digite o numero [${LATEST_INDEX}] ou a tag (ex: ${LATEST_TAG}): " INPUT
 
     if [ -z "$INPUT" ]; then
-      INPUT="0"
+      INPUT="${LATEST_INDEX}"
     fi
 
     if [[ "$INPUT" =~ ^[0-9]+$ ]]; then

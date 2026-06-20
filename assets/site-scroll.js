@@ -3,7 +3,13 @@
     history.scrollRestoration = "manual";
   }
 
-  var HEADER_OFFSET = 88;
+  function getHeaderOffset() {
+    var nav = document.querySelector("nav");
+    if (nav) {
+      return Math.ceil(nav.getBoundingClientRect().height) + 12;
+    }
+    return window.innerWidth < 768 ? 64 : 88;
+  }
 
   function scrollToTarget(id) {
     if (id === "top") {
@@ -14,17 +20,27 @@
     var el = document.getElementById(id);
     if (!el) return false;
 
-    var y = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+    var target = el;
+    if (id === "nossa-historia") {
+      target = el.querySelector("h2") || el;
+    }
+
+    var offset = getHeaderOffset();
+    var y = target.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top: Math.max(0, y), behavior: "auto" });
     return true;
   }
 
   function isAtTarget(id) {
     if (id === "top") return window.scrollY < 20;
+
     var el = document.getElementById(id);
     if (!el) return false;
-    var top = el.getBoundingClientRect().top;
-    return top <= HEADER_OFFSET + 12 && top >= HEADER_OFFSET - 36;
+
+    var target = id === "nossa-historia" ? el.querySelector("h2") || el : el;
+    var top = target.getBoundingClientRect().top;
+    var offset = getHeaderOffset();
+    return top <= offset + 16 && top >= offset - 48;
   }
 
   function runScroll() {
@@ -42,11 +58,11 @@
         return;
       }
 
-      if (tries >= 30) {
+      if (tries >= 50) {
         sessionStorage.removeItem("ga-scroll");
         clearInterval(timer);
       }
-    }, 150);
+    }, 120);
   }
 
   window.gaRunScroll = runScroll;
@@ -64,6 +80,12 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    setTimeout(runScroll, 80);
+    setTimeout(runScroll, 100);
+    setTimeout(runScroll, 500);
+    setTimeout(runScroll, 1200);
+  });
+
+  window.addEventListener("load", function () {
+    setTimeout(runScroll, 200);
   });
 })();

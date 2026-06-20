@@ -24,7 +24,1679 @@
       .site-header-logo{height:2.75rem!important;width:auto!important;max-width:170px!important;object-fit:contain}
       @media(min-width:768px){.site-header-logo{height:4.85rem!important;max-width:290px!important}}
     </style>
-    <!--SITE_CUSTOM_CSS-->
+    <style id="site-custom-inline">
+/* Gerado automaticamente — nao edite. Fonte: responsive.css, typography-responsive.css, overrides.css, cookies.css */
+/* === responsive.css === */
+/*
+ * Design responsivo — equivalente ao padrão MUI sx + breakpoints.
+ * Use media queries com estes valores; prefira clamp() para tamanhos fluidos.
+ *
+ * Breakpoint | min-width | Uso típico
+ * -----------|-----------|------------
+ * xs         | 0–767     | celular
+ * sm         | 768–1023  | tablet
+ * md         | 1024–1279 | notebook
+ * lg         | 1280–1535 | desktop
+ * xl         | 1536+     | monitor grande (tamanhos originais)
+ *
+ * Tipografia do site: assets/typography-responsive.css
+ */
+:root {
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1536px;
+  --content-max: 80rem;
+}
+
+/* Container fluido — max-width sobe conforme a tela */
+.site-container-fluid {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3vw, 3rem);
+}
+
+
+/* === typography-responsive.css === */
+/*
+ * Tipografia em camadas (estilo MUI xs / md / lg / xl)
+ * Teto global em todos os breakpoints — dev e produção com os mesmos limites.
+ * lg 1280–1535 → desktop
+ * md 1024–1279 → notebook
+ * sm 768–1023  → tablet
+ * xs ≤767      → mobile (overrides.css)
+ */
+#root {
+  --hero-h1: clamp(1.9rem, 1.15rem + 1.55vw, 2.85rem);
+  --section-display: clamp(1.7rem, 1rem + 1.35vw, 2.5rem);
+  --section-h2: clamp(1.5rem, 0.9rem + 1.1vw, 2.15rem);
+  --section-h3: clamp(1.25rem, 0.75rem + 0.65vw, 1.65rem);
+  --stat-number: clamp(1.45rem, 0.85rem + 0.85vw, 2rem);
+  --text-lg-size: 1.0625rem;
+  --text-body: 0.9375rem;
+}
+
+@media (max-width: 1535px) {
+  #root {
+    --hero-h1: clamp(1.9rem, 1.15rem + 1.55vw, 2.85rem);
+    --section-display: clamp(1.7rem, 1rem + 1.35vw, 2.5rem);
+    --section-h2: clamp(1.5rem, 0.9rem + 1.1vw, 2.15rem);
+    --section-h3: clamp(1.25rem, 0.75rem + 0.65vw, 1.65rem);
+    --stat-number: clamp(1.45rem, 0.85rem + 0.85vw, 2rem);
+    --text-lg-size: 1.0625rem;
+    --text-body: 0.9375rem;
+  }
+}
+
+@media (max-width: 1279px) {
+  #root {
+    --hero-h1: clamp(1.55rem, 0.85rem + 1.45vw, 2.15rem);
+    --section-display: clamp(1.45rem, 0.75rem + 1.2vw, 2rem);
+    --section-h2: clamp(1.3rem, 0.65rem + 1vw, 1.75rem);
+    --section-h3: clamp(1.1rem, 0.55rem + 0.55vw, 1.35rem);
+    --stat-number: clamp(1.25rem, 0.65rem + 0.7vw, 1.65rem);
+    --text-lg-size: 1rem;
+    --text-body: 0.9rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  #root {
+    --hero-h1: clamp(1.45rem, 0.7rem + 1.35vw, 1.9rem);
+    --section-display: clamp(1.35rem, 0.65rem + 1.1vw, 1.85rem);
+    --section-h2: clamp(1.2rem, 0.55rem + 0.9vw, 1.55rem);
+    --section-h3: clamp(1.05rem, 0.45rem + 0.5vw, 1.25rem);
+    --stat-number: clamp(1.15rem, 0.55rem + 0.6vw, 1.45rem);
+    --text-lg-size: 0.9375rem;
+    --text-body: 0.875rem;
+  }
+}
+
+#root #inicio h1,
+#root #inicio h1.font-display,
+#root #inicio h1.lg\:text-7xl,
+#root #inicio h1.md\:text-6xl {
+  font-size: var(--hero-h1) !important;
+  line-height: 1.1 !important;
+}
+
+#root .font-display.text-4xl,
+#root .font-display.md\:text-6xl,
+#root h2.font-display.text-4xl,
+#root h2.font-display.md\:text-6xl {
+  font-size: var(--section-display) !important;
+  line-height: 1.12 !important;
+}
+
+#root h2.text-3xl,
+#root h2.md\:text-5xl,
+#root .text-3xl.md\:text-5xl,
+#root h1.text-4xl,
+#root h1.md\:text-6xl,
+#root .min-h-\[80vh\] h1,
+#root #hero-investidor h1 {
+  font-size: var(--section-h2) !important;
+  line-height: 1.15 !important;
+}
+
+#root .nossa-historia-section h2,
+#root .site-timeline-section h2 {
+  font-size: var(--section-h2) !important;
+}
+
+#root .text-5xl,
+#root .md\:text-7xl,
+#root #inicio .mt-12 .font-display {
+  font-size: var(--stat-number) !important;
+}
+
+#root p.text-lg,
+#root .text-lg {
+  font-size: var(--text-lg-size) !important;
+}
+
+#root .premium-card h3,
+#root .group.bg-card.rounded-3xl h3 {
+  font-size: var(--section-h3) !important;
+}
+
+#root section[style*="hsl(0,0%,3%)"] h2.text-3xl,
+#root section[style*="hsl(0,0%,3%)"] .text-3xl {
+  font-size: var(--section-h2) !important;
+}
+
+#root section[style*="hsl(0,0%,3%)"] p.text-lg {
+  font-size: var(--text-lg-size) !important;
+}
+
+#root .premium-card p,
+#root .premium-card ul li,
+#root .nossa-historia-section p,
+#root .site-timeline-card p,
+#root .text-\[15px\] {
+  font-size: var(--text-body) !important;
+}
+
+/* Layout compacto — só abaixo de xl (monitores grandes mantêm espaçamento original) */
+@media (max-width: 1535px) {
+  #root section.py-24,
+  #root section.py-20,
+  #root section.py-24.md\:py-36 {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  #root #inicio p.text-sm,
+  #root #inicio p.md\:text-lg,
+  #root #inicio p {
+    font-size: var(--text-lg-size) !important;
+    max-width: 32rem;
+  }
+}
+
+@media (max-width: 1279px) {
+  #root .premium-card,
+  #root .group.bg-card.rounded-3xl {
+    padding: 1.5rem !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  #root #inicio .inline-flex.items-center.gap-2 p {
+    font-size: 0.625rem !important;
+    letter-spacing: 0.26em !important;
+  }
+
+  #root #inicio a.rounded-full {
+    font-size: 0.75rem !important;
+    padding: 0.65rem 1.25rem !important;
+  }
+}
+
+/* Nossa História — telas grandes (levemente maior que o padrão) */
+@media (min-width: 1280px) {
+  #root .nossa-historia-section h2 {
+    font-size: clamp(1.85rem, 1.05rem + 0.95vw, 2.25rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  #root .nossa-historia-section p,
+  #root .nossa-historia-section .text-\[16px\] {
+    font-size: clamp(1rem, 0.92rem + 0.12vw, 1.0625rem) !important;
+    line-height: 1.7 !important;
+  }
+}
+
+
+/* === overrides.css === */
+/* Header fixo */
+html {
+  scroll-padding-top: 4rem;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (max-width: 767px) {
+  html,
+  body {
+    overscroll-behavior-y: none;
+  }
+}
+
+nav {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 100 !important;
+  transform: translate3d(0, 0, 0) !important;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-bottom: 1px solid hsl(0 0% 90% / 0.8);
+}
+
+nav .site-mobile-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+nav .site-mobile-nav .site-nav-link {
+  display: block !important;
+  width: 100% !important;
+  text-align: left;
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+  font-size: 0.9375rem !important;
+  border-bottom: 1px solid hsl(0 0% 92%);
+  white-space: normal;
+}
+
+nav .site-mobile-nav .site-nav-link:last-child {
+  border-bottom: none;
+}
+
+nav > div,
+nav .h-16 {
+  min-height: 4.75rem !important;
+  height: auto !important;
+}
+
+@media (min-width: 768px) {
+  nav > div,
+  nav .md\:h-\[4\.5rem\] {
+    min-height: 5.25rem !important;
+  }
+}
+
+nav .max-w-7xl {
+  align-items: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.site-header-logo {
+  height: 2.75rem !important;
+  width: auto !important;
+  max-width: 170px !important;
+  object-fit: contain;
+  object-position: left center;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .site-header-logo {
+    height: 4.85rem !important;
+    max-width: 290px !important;
+  }
+}
+
+/* Menu — hover laranja, maior, barrinha */
+nav .site-nav-link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.35rem;
+  font-size: 0.9375rem;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+nav .site-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: hsl(25 95% 53%);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s ease;
+  border-radius: 2px;
+}
+
+nav .site-nav-link:hover,
+nav .site-nav-link.is-active {
+  color: hsl(25 95% 53%) !important;
+  transform: scale(1.06);
+}
+
+nav .site-nav-link:hover::after,
+nav .site-nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+nav .md\:hidden .site-nav-link:hover,
+nav .md\:hidden .site-nav-link.is-active {
+  transform: none;
+  font-size: 1.125rem;
+}
+
+/* Footer */
+.site-footer {
+  background: hsl(0 0% 99%) !important;
+  padding-top: 2.5rem !important;
+  padding-bottom: 0 !important;
+}
+
+.site-footer .footer-main-grid {
+  gap: 2rem !important;
+  margin-bottom: 1.25rem !important;
+  padding-top: 0;
+  padding-bottom: 2rem;
+}
+
+.site-footer .footer-brand-col {
+  align-items: center;
+  text-align: center;
+}
+
+.site-footer .footer-brand-logo {
+  height: 4.5rem !important;
+  width: auto !important;
+  max-width: 270px !important;
+  filter: none !important;
+  opacity: 1;
+  object-fit: contain;
+  object-position: center;
+  margin: 0 auto 1rem !important;
+}
+
+.site-footer .footer-brand-col p {
+  font-size: 0.9375rem !important;
+  line-height: 1.65 !important;
+  max-width: 22rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.site-footer .footer-brand-tagline {
+  max-width: none;
+  width: fit-content;
+  padding: 0 0.5rem;
+}
+
+.site-footer .footer-tagline-line1,
+.site-footer .footer-tagline-line2 {
+  display: block;
+  line-height: 1.55;
+}
+
+.site-footer .footer-tagline-line1 {
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .site-footer .footer-tagline-line1 {
+    white-space: normal;
+    max-width: 16rem;
+    margin: 0 auto;
+  }
+}
+
+.site-footer .footer-main-grid h4 {
+  font-size: 0.8125rem !important;
+  letter-spacing: 0.18em !important;
+}
+
+.site-footer .footer-main-grid .flex.flex-col.gap-3 a {
+  font-size: 0.9375rem !important;
+}
+
+.site-footer .footer-contact-link,
+.site-footer .footer-location {
+  font-size: 0.875rem !important;
+  line-height: 1.55 !important;
+}
+
+.site-footer .grid > div:last-child,
+.site-footer .footer-main-grid > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.site-footer .footer-contact-link svg {
+  flex-shrink: 0;
+  opacity: 0.85;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.site-footer .footer-location::before {
+  content: "";
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  opacity: 0.85;
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6'%3E%3Cpath d='M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6'%3E%3Cpath d='M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+}
+
+@media (min-width: 768px) {
+  .site-footer .footer-main-grid {
+    gap: 4rem !important;
+    padding-bottom: 3rem;
+  }
+
+  .site-footer .footer-brand-logo {
+    height: 5rem !important;
+    max-width: 300px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-footer .footer-main-grid {
+    gap: 5rem !important;
+  }
+}
+
+.site-footer .footer-legal-links {
+  gap: 0 !important;
+}
+
+.site-footer .footer-legal-sep {
+  display: inline-block;
+  color: hsl(0 0% 55%);
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.site-footer .footer-copyright {
+  padding-top: 1rem !important;
+  padding-bottom: 2.25rem !important;
+  margin-top: 0 !important;
+  border-color: hsl(0 0% 90% / 0.8) !important;
+}
+
+.site-footer .footer-copyright p {
+  font-size: 0.65rem;
+  line-height: 1.5;
+  max-width: 52rem;
+  margin: 0 auto;
+  letter-spacing: 0.01em;
+}
+
+/* Mapa — altura só no wrapper; filhos 100% (evita faixa branca no mobile) */
+#nossas-lojas-mapa {
+  scroll-margin-top: 5.5rem;
+  height: 480px;
+  overflow: hidden;
+  line-height: 0;
+  background: #eae9e4;
+}
+
+#nossas-lojas-mapa .leaflet-container,
+#nossas-lojas-mapa > div {
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
+  width: 100% !important;
+}
+
+@media (max-width: 1535px) {
+  #nossas-lojas-mapa {
+    height: 360px;
+  }
+}
+
+@media (max-width: 1279px) {
+  #nossas-lojas-mapa {
+    height: 320px;
+  }
+}
+
+@media (max-width: 1023px) {
+  #nossas-lojas-mapa .leaflet-marker-icon.site-store-pin {
+    width: 18px !important;
+    height: 24px !important;
+    margin-left: -9px !important;
+    margin-top: -24px !important;
+  }
+
+  #nossas-lojas-mapa .leaflet-marker-icon.site-store-pin svg {
+    width: 18px !important;
+    height: 24px !important;
+    display: block;
+  }
+}
+
+@media (max-width: 767px) {
+  #nossas-lojas-mapa {
+    height: 180px;
+    margin-bottom: 1.25rem !important;
+  }
+
+  #nossas-lojas-mapa .leaflet-marker-icon.site-store-pin {
+    width: 16px !important;
+    height: 21px !important;
+    margin-left: -8px !important;
+    margin-top: -21px !important;
+  }
+
+  #nossas-lojas-mapa .leaflet-marker-icon.site-store-pin svg {
+    width: 16px !important;
+    height: 21px !important;
+  }
+
+  #nossas-lojas-mapa .leaflet-control-zoom {
+    transform: scale(0.85);
+    transform-origin: top left;
+  }
+}
+
+.leaflet-container {
+  cursor: grab;
+}
+
+.leaflet-container:active {
+  cursor: grabbing;
+}
+
+/* Linha do tempo — interativa */
+.site-timeline-section {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    160deg,
+    hsl(25 28% 95%) 0%,
+    hsl(0 0% 97%) 45%,
+    hsl(25 18% 93%) 100%
+  ) !important;
+  border-top: 1px solid hsl(25 40% 88%) !important;
+}
+
+.site-timeline-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+      hsl(25 95% 53% / 0.07) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      hsl(25 95% 53% / 0.04) 1px,
+      transparent 1px
+    );
+  background-size: 28px 28px, 80px 80px;
+  pointer-events: none;
+}
+
+.site-timeline-section > .max-w-4xl {
+  position: relative;
+  z-index: 1;
+}
+
+.site-timeline {
+  position: relative;
+  padding-left: 0.25rem;
+}
+
+.site-timeline::before {
+  display: none;
+}
+
+.site-timeline-item {
+  position: relative;
+  z-index: 1;
+}
+
+.site-timeline-marker {
+  position: relative;
+  z-index: 2;
+}
+
+.site-timeline-year {
+  position: relative;
+  z-index: 3;
+  background: hsl(25 60% 94%) !important;
+  color: hsl(25 95% 48%) !important;
+  border: 2px solid hsl(25 95% 53%) !important;
+  box-shadow: 0 8px 24px hsl(25 95% 53% / 0.18);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.site-timeline-year span {
+  color: hsl(25 95% 45%) !important;
+}
+
+.site-timeline-line {
+  min-height: 3.5rem !important;
+  width: 3px !important;
+  margin-top: 0.75rem !important;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    hsl(25 95% 53%) 0%,
+    hsl(25 95% 53% / 0.45) 65%,
+    hsl(25 95% 53% / 0.1) 100%
+  ) !important;
+}
+
+.site-timeline-item:last-child .site-timeline-line {
+  display: none !important;
+}
+
+.site-timeline-card {
+  position: relative;
+  top: 0.25rem;
+  background: hsl(0 0% 100% / 0.94) !important;
+  backdrop-filter: blur(4px);
+  border-left: 3px solid hsl(25 95% 53% / 0.45) !important;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+}
+
+.site-timeline-card p {
+  transition: color 0.35s ease, transform 0.35s ease;
+}
+
+.site-timeline-item:last-child .site-timeline-card {
+  margin-bottom: 0;
+}
+
+.site-timeline-item:hover .site-timeline-year {
+  transform: scale(1.08);
+  box-shadow: 0 10px 28px hsl(25 95% 53% / 0.28);
+  background: hsl(25 65% 92%) !important;
+}
+
+.site-timeline-item:hover .site-timeline-card {
+  transform: translateX(10px);
+  border-left-color: hsl(25 95% 53%) !important;
+  box-shadow: 0 14px 36px hsl(25 95% 53% / 0.14);
+  background: hsl(0 0% 100%) !important;
+}
+
+.site-timeline-item:hover .site-timeline-card p {
+  color: hsl(0 0% 18%) !important;
+  transform: translateX(2px);
+}
+
+@media (min-width: 768px) {
+  .site-timeline-item {
+    gap: 2.5rem;
+  }
+
+  .site-timeline-card {
+    top: 0.5rem;
+  }
+}
+
+/* Nossa História */
+#inicio,
+#nossa-historia,
+.nossa-historia-section,
+#hero-investidor {
+  scroll-margin-top: 5.5rem;
+}
+
+.site-history-media {
+  width: 100%;
+  max-width: min(100%, 22rem);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.site-history-media .sticky,
+.site-history-media .site-history-stack {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: clamp(0.65rem, 2vw, 1rem) !important;
+  width: 100%;
+  position: static !important;
+}
+
+.site-history-media img.site-history-photo-main,
+.site-history-media img.site-history-photo-secondary {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  min-height: unset !important;
+  max-height: clamp(140px, 40vw, 240px);
+  object-fit: cover;
+  object-position: center;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.nossa-historia-section .max-w-5xl {
+  align-items: stretch;
+}
+
+.history-text-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-text-col h2 {
+  margin-bottom: 2.5rem;
+}
+
+/* Nossa História — responsivo: imagens acompanham altura do texto */
+@media (min-width: 768px) {
+  .nossa-historia-section .max-w-5xl {
+    grid-template-columns: 1fr min(42%, 28rem) !important;
+    gap: clamp(2rem, 4vw, 4rem) !important;
+    align-items: stretch !important;
+  }
+
+  .site-history-media {
+    max-width: min(100%, clamp(16rem, 30vw, 28rem));
+    margin-left: auto;
+    margin-right: 0;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+  .site-history-media .sticky,
+  .site-history-media .site-history-stack {
+    flex: 1 1 auto;
+    min-height: 100%;
+    display: grid !important;
+    grid-template-rows: 1fr 1fr;
+    gap: clamp(0.65rem, 1.2vw, 1rem) !important;
+    align-content: stretch;
+  }
+
+  .site-history-media img.site-history-photo-main,
+  .site-history-media img.site-history-photo-secondary {
+    max-height: none !important;
+    min-height: 0 !important;
+    height: 100%;
+    width: 100%;
+    aspect-ratio: unset;
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-history-media {
+    max-width: min(100%, clamp(19rem, 28vw, 30rem));
+  }
+}
+
+@media (max-width: 767px) {
+  .nossa-historia-section .max-w-5xl {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .site-history-media {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .site-history-media img.site-history-photo-main,
+  .site-history-media img.site-history-photo-secondary {
+    max-height: clamp(160px, 44vw, 260px) !important;
+    min-height: unset !important;
+    aspect-ratio: 4 / 3;
+    height: auto;
+  }
+
+  .nossa-historia-section h2 {
+    font-size: 1.35rem !important;
+  }
+
+  .nossa-historia-section p {
+    font-size: 0.8125rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .min-h-\[80vh\] h1.text-4xl {
+    font-size: 1.35rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .min-h-\[80vh\] .text-xs.tracking-\[0\.4em\] {
+    font-size: 0.55rem !important;
+    letter-spacing: 0.22em !important;
+    padding: 0.35rem 0.65rem !important;
+  }
+}
+
+/* Responsividade geral */
+@media (max-width: 767px) {
+  nav .max-w-7xl {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .site-footer {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .site-footer .footer-main-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+
+  .site-footer .footer-main-grid > div:nth-child(2),
+  .site-footer .footer-main-grid > div:nth-child(3) {
+    align-items: center;
+  }
+
+  .site-footer .footer-main-grid .flex.flex-col.gap-3 {
+    align-items: center;
+  }
+
+  .site-footer .footer-contact-link,
+  .site-footer .footer-location {
+    justify-content: center;
+  }
+}
+
+/* Nossa Presença — mapas como referência (contorno + silhueta) */
+.site-presence-card {
+  background: hsl(0 0% 100%) !important;
+  border-color: hsl(0 0% 90%) !important;
+  transition:
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s ease !important;
+}
+
+.premium-card {
+  transition:
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s ease !important;
+}
+
+.site-presence-card:hover {
+  border-color: hsl(25 95% 53% / 0.45) !important;
+  box-shadow:
+    0 14px 44px -10px hsl(25 95% 53% / 0.38),
+    0 6px 18px -6px hsl(25 95% 53% / 0.22) !important;
+}
+
+/* Cards — sombra laranja no hover (inspiram, presença, lojas) */
+.premium-card:hover,
+.group.bg-card.rounded-3xl:hover {
+  border-color: hsl(25 95% 53% / 0.45) !important;
+  box-shadow:
+    0 16px 48px -10px hsl(25 95% 53% / 0.4),
+    0 6px 20px -6px hsl(25 95% 53% / 0.24) !important;
+}
+
+#nossas-lojas-mapa + div button {
+  transition:
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s ease !important;
+}
+
+#nossas-lojas-mapa + div button:hover {
+  border-color: hsl(25 95% 53% / 0.5) !important;
+  box-shadow:
+    0 10px 32px -8px hsl(25 95% 53% / 0.42),
+    0 4px 14px -4px hsl(25 95% 53% / 0.26) !important;
+}
+
+.site-presence-card h3 {
+  color: hsl(0 0% 9%) !important;
+}
+
+.site-presence-card p {
+  color: hsl(0 0% 45%) !important;
+}
+
+.site-presence-map {
+  background: transparent;
+  min-height: 220px;
+}
+
+.site-presence-map-img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 240px;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Modal lojas — logo da marca */
+.store-modal-footer {
+  align-items: flex-end !important;
+}
+
+.store-modal-brand {
+  height: 3.85rem !important;
+  max-height: none !important;
+  max-width: 10.5rem !important;
+  width: auto !important;
+  object-fit: contain;
+  object-position: right bottom;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, filter 0.3s ease;
+  transform-origin: right bottom;
+  cursor: pointer;
+}
+
+.store-modal-brand[alt="Popeyes"] {
+  height: 4.75rem !important;
+  max-width: 13.5rem !important;
+}
+
+.store-modal-brand[alt="Burger King"] {
+  height: 4rem !important;
+  max-width: 11rem !important;
+}
+
+.store-modal-brand:hover {
+  transform: scale(1.16);
+  opacity: 1 !important;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.18));
+}
+
+/* Hero — imagem de fundo (slideshow) */
+#inicio {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+#inicio > .absolute,
+#inicio .absolute.inset-0 {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
+section img[alt="Grupo Alvim restaurante"],
+#inicio .absolute.inset-0 img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+@media (max-width: 767px) {
+  #inicio {
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+  }
+
+  #inicio > .absolute,
+  #inicio .absolute.inset-0 {
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+  }
+}
+
+/* Telas grandes — mesma escala compacta do dev */
+@media (min-width: 1536px) {
+  #root .text-7xl,
+  #root .md\:text-7xl,
+  #root .lg\:text-7xl,
+  #root #inicio h1 {
+    font-size: clamp(1.9rem, 1.15rem + 1.55vw, 2.85rem) !important;
+  }
+
+  #root .text-6xl,
+  #root .md\:text-6xl,
+  #root .font-display.text-4xl,
+  #root .font-display.md\:text-6xl {
+    font-size: clamp(1.7rem, 1rem + 1.35vw, 2.5rem) !important;
+  }
+
+  #root .text-5xl,
+  #root .md\:text-5xl,
+  #root .text-3xl,
+  #root .md\:text-5xl {
+    font-size: clamp(1.5rem, 0.9rem + 1.1vw, 2.15rem) !important;
+  }
+
+  #root section.py-24,
+  #root section.py-20,
+  #root section.py-24.md\:py-36 {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+}
+
+/* Mobile — logos, modal, menu, hero */
+@media (max-width: 767px) {
+  #nossa-historia,
+  .nossa-historia-section {
+    scroll-margin-top: 4.25rem !important;
+  }
+
+  nav > div,
+  nav .h-16 {
+    min-height: 3.75rem !important;
+  }
+
+  nav .site-menu-toggle {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  nav .site-menu-toggle svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+  }
+
+  nav .site-menu-toggle svg line {
+    stroke: currentColor;
+  }
+
+  nav .site-mobile-nav .site-nav-link.text-lg {
+    font-size: 0.9375rem !important;
+  }
+
+  .site-footer .footer-brand-logo {
+    height: 3.25rem !important;
+    max-width: 190px !important;
+  }
+
+  .site-footer .footer-tagline-line1,
+  .site-footer .footer-tagline-line2 {
+    font-size: 0.8rem !important;
+    white-space: normal;
+    max-width: 15rem;
+  }
+
+  .store-modal-brand {
+    height: 2.35rem !important;
+    max-width: 6.5rem !important;
+  }
+
+  .store-modal-brand[alt="Popeyes"] {
+    height: 2.65rem !important;
+    max-width: 7.5rem !important;
+  }
+
+  .store-modal-brand[alt="Burger King"] {
+    height: 2.5rem !important;
+    max-width: 7rem !important;
+  }
+
+  .store-modal-brand:hover {
+    transform: scale(1.08);
+  }
+
+  .store-location-modal {
+    width: calc(100vw - 2rem) !important;
+    max-width: 22rem !important;
+    margin: 0 auto;
+    padding: 1.25rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .store-location-modal h2 {
+    font-size: 1.25rem !important;
+  }
+
+  #inicio {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-top: 4.5rem !important;
+    padding-bottom: 2.5rem !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+  }
+
+  #inicio > div.relative.z-10.w-full {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+    margin: auto 0;
+  }
+
+  #inicio .max-w-3xl {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-right: 0;
+  }
+
+  #inicio .mt-12,
+  #inicio .mt-12.md\:mt-16 {
+    margin-top: 1.25rem !important;
+    justify-content: center;
+    width: 100%;
+  }
+
+  #inicio h1 {
+    text-align: center;
+    font-size: clamp(1.45rem, 6.5vw, 2rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  #inicio h1 br {
+    display: none !important;
+  }
+
+  #inicio p {
+    text-align: center;
+    font-size: 0.875rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  #inicio .inline-flex.items-center.gap-2.mb-6,
+  #inicio .inline-flex.items-center.gap-2.mb-6.md\:mb-8 {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    margin-bottom: 0.75rem !important;
+    padding: 0.35rem 0.75rem !important;
+  }
+
+  #inicio .inline-flex.items-center.gap-2 span.rounded-full {
+    flex-shrink: 0;
+    margin-top: 0 !important;
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  #inicio .inline-flex.items-center.gap-2 p {
+    font-size: 0.52rem !important;
+    letter-spacing: 0.18em !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+  }
+
+  #inicio .flex.flex-wrap.items-center.gap-4 {
+    justify-content: center;
+    width: 100%;
+    gap: 0.75rem !important;
+  }
+
+  #inicio a.rounded-full {
+    font-size: 0.62rem !important;
+    padding: 0.5rem 0.85rem !important;
+    letter-spacing: 0.06em;
+    gap: 0.5rem !important;
+    width: auto !important;
+    max-width: 100%;
+    justify-content: center;
+    align-self: center;
+  }
+
+  #inicio a.border-b {
+    align-self: center;
+    font-size: 0.62rem !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  #inicio a.rounded-full svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  #inicio .font-display.text-2xl,
+  #inicio .font-display.text-2xl.md\:text-3xl {
+    font-size: 1.15rem !important;
+  }
+
+  #inicio span.text-\[10px\],
+  #inicio .text-\[10px\].md\:text-xs {
+    font-size: 0.52rem !important;
+    letter-spacing: 0.15em !important;
+  }
+
+  .text-5xl {
+    font-size: 1.65rem !important;
+  }
+
+  .text-7xl,
+  .md\:text-7xl {
+    font-size: 1.65rem !important;
+  }
+
+  .text-4xl,
+  .md\:text-4xl,
+  .md\:text-6xl,
+  .font-display.text-4xl {
+    font-size: 1.45rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .text-3xl {
+    font-size: 1.35rem !important;
+  }
+
+  .text-2xl {
+    font-size: 1.15rem !important;
+  }
+
+  .text-xl {
+    font-size: 1rem !important;
+  }
+
+  .text-lg {
+    font-size: 0.9rem !important;
+  }
+
+  /* Hero início — badge (texto no parágrafo interno, ver regras acima) */
+
+  /* Stats +20 restaurantes (grid e carrossel) */
+  .grid.grid-cols-2 .text-5xl {
+    font-size: 1.5rem !important;
+  }
+
+  .grid.grid-cols-2 .text-xs {
+    font-size: 0.6rem !important;
+    letter-spacing: 0.12em !important;
+  }
+
+  /* O que nos move + cards inspiração */
+  .premium-card {
+    padding: 1.25rem !important;
+    text-align: center;
+  }
+
+  .premium-card > div.w-14,
+  .group.bg-card.rounded-3xl > div.w-14 {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .premium-card h3,
+  .group.bg-card.rounded-3xl h3 {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .premium-card ul {
+    margin-top: 0 !important;
+    text-align: left;
+  }
+
+  .premium-card ul li {
+    gap: 0.5rem !important;
+  }
+
+  .premium-card ul li > span.rounded-full {
+    margin-top: 0.35rem !important;
+  }
+
+  .premium-card p,
+  .group.bg-card.rounded-3xl p {
+    font-size: 0.8125rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .grid.grid-cols-2.md\:grid-cols-4.gap-3 img,
+  .grid.grid-cols-2.md\:grid-cols-4.gap-3 .aspect-\[4\/3\] {
+    max-height: 110px;
+  }
+
+  .grid.grid-cols-2.md\:grid-cols-4.gap-3 .col-span-2.row-span-2 img {
+    max-height: 180px;
+  }
+
+  .group.bg-card.rounded-3xl {
+    padding: 1.25rem !important;
+  }
+
+  /* Franqueado — seções e formulário */
+  #hero-investidor h1 {
+    font-size: 1.35rem !important;
+    line-height: 1.15 !important;
+  }
+
+  #hero-investidor p.text-lg {
+    font-size: 0.8125rem !important;
+    line-height: 1.55 !important;
+  }
+
+  #hero-investidor .text-xs {
+    font-size: 0.55rem !important;
+    letter-spacing: 0.2em !important;
+    padding: 0.35rem 0.65rem !important;
+  }
+
+  section[style*="hsl(0,0%,3%)"] h2.text-3xl,
+  section[style*="hsl(0,0%,3%)"] .text-3xl {
+    font-size: 1.35rem !important;
+    line-height: 1.2 !important;
+  }
+
+  section[style*="hsl(0,0%,3%)"] p.text-lg {
+    font-size: 0.8125rem !important;
+    line-height: 1.55 !important;
+  }
+
+  h2.text-3xl.md\:text-5xl {
+    font-size: 1.35rem !important;
+    line-height: 1.2 !important;
+  }
+
+  p.text-lg.leading-relaxed {
+    font-size: 0.8125rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .text-\[15px\] {
+    font-size: 0.8125rem !important;
+  }
+
+  /* Franqueado — cards parceiro centralizados */
+  .group.bg-card.rounded-3xl {
+    text-align: center;
+  }
+
+  /* Linha do tempo */
+  .site-timeline-section h2 {
+    font-size: 1.35rem !important;
+  }
+
+  .site-timeline-section .text-xs {
+    font-size: 0.55rem !important;
+    letter-spacing: 0.22em !important;
+  }
+
+  .site-timeline-year {
+    font-size: 0.85rem !important;
+    min-width: 3.25rem !important;
+    height: 3.25rem !important;
+  }
+
+  .site-timeline-card {
+    padding: 1rem !important;
+  }
+
+  .site-timeline-card p {
+    font-size: 0.8rem !important;
+  }
+
+  /* Modal lojas — endereços e contato */
+  .store-location-modal p,
+  .store-location-modal .text-sm {
+    font-size: 0.78rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .store-location-modal .flex.items-start.gap-3 {
+    padding: 0.65rem !important;
+  }
+
+  .store-location-modal .store-modal-footer a {
+    font-size: 0.78rem !important;
+  }
+
+  .store-location-modal .store-modal-footer svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  /* Lista de lojas abaixo do mapa */
+  #nossas-lojas-mapa + div {
+    gap: 0.5rem !important;
+  }
+
+  #nossas-lojas-mapa + div button {
+    padding: 0.55rem 0.65rem !important;
+    font-size: 0.7rem !important;
+    border-radius: 0.65rem !important;
+    gap: 0.45rem !important;
+  }
+
+  #nossas-lojas-mapa + div button .text-xs {
+    font-size: 0.55rem !important;
+    margin-bottom: 0.1rem !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  #nossas-lojas-mapa + div button .text-sm {
+    font-size: 0.7rem !important;
+    line-height: 1.35 !important;
+  }
+
+  #nossas-lojas-mapa + div button svg {
+    width: 13px !important;
+    height: 13px !important;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* Footer — tagline máx. 3 linhas */
+  .site-footer .footer-tagline-line1 {
+    font-size: 0.65rem !important;
+    max-width: 19rem;
+    line-height: 1.3 !important;
+    white-space: normal;
+  }
+
+  .site-footer .footer-tagline-line2 {
+    font-size: 0.65rem !important;
+    max-width: 19rem;
+    line-height: 1.3 !important;
+  }
+
+  .site-footer .footer-brand-col p {
+    font-size: 0.65rem !important;
+  }
+
+  .site-footer .footer-main-grid h4 {
+    font-size: 0.65rem !important;
+    margin-bottom: 0.65rem !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  .site-footer .footer-main-grid .flex.flex-col.gap-3 a,
+  .site-footer .footer-contact-link,
+  .site-footer .footer-location {
+    font-size: 0.75rem !important;
+  }
+
+  .site-footer .footer-copyright p {
+    font-size: 0.58rem !important;
+  }
+
+  /* Títulos de seção (Espaços que nos inspiram, Nossos Restaurantes, etc.) */
+  .font-display.text-4xl.md\:text-6xl {
+    font-size: 1.35rem !important;
+    line-height: 1.15 !important;
+  }
+
+  section .text-xs.tracking-\[0\.4em\] {
+    font-size: 0.55rem !important;
+    letter-spacing: 0.22em !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  section .text-center.mb-16,
+  section .text-center.mb-20 {
+    margin-bottom: 2rem !important;
+  }
+
+  /* Seções padding */
+  section.py-24,
+  section.py-20 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Botão enviar formulário */
+  form button[type="submit"].rounded-full,
+  button[type="submit"].w-full.bg-primary {
+    padding: 0.65rem 1.25rem !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.08em !important;
+    min-height: unset !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-header-logo {
+    height: 2.35rem !important;
+    max-width: 140px !important;
+  }
+
+  #inicio h1 {
+    font-size: 1.35rem !important;
+  }
+
+  #inicio a.rounded-full {
+    font-size: 0.62rem !important;
+    padding: 0.5rem 0.85rem !important;
+    width: auto !important;
+    justify-content: flex-start;
+  }
+}
+
+
+/* === cookies.css === */
+#cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  padding: 0.75rem 1rem;
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0));
+  background: hsl(0 0% 100%);
+  border-top: 1px solid hsl(0 0% 90%);
+  box-shadow: 0 -6px 24px hsl(0 0% 0% / 0.08);
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+#cookie-banner.cookie-banner--hide {
+  transform: translateY(110%);
+  opacity: 0;
+}
+
+.cookie-banner__inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+}
+
+.cookie-banner__text {
+  flex: 1 1 16rem;
+  min-width: 0;
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: hsl(0 0% 32%);
+}
+
+.cookie-banner__text a {
+  color: hsl(25 95% 45%);
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.cookie-banner__actions {
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cookie-banner__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.cookie-banner__btn--primary {
+  background: hsl(25 95% 53%);
+  color: white;
+}
+
+.cookie-banner__btn--primary:hover {
+  background: hsl(25 95% 48%);
+}
+
+.cookie-banner__btn--ghost {
+  background: transparent;
+  color: hsl(0 0% 35%);
+  border: 1px solid hsl(0 0% 85%);
+}
+
+.cookie-banner__btn--ghost:hover {
+  border-color: hsl(25 95% 53%);
+  color: hsl(25 95% 45%);
+}
+
+@media (max-width: 767px) {
+  #cookie-banner {
+    padding: 0.65rem 0.75rem;
+    padding-bottom: calc(0.65rem + env(safe-area-inset-bottom, 0));
+  }
+
+  .cookie-banner__inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.55rem;
+  }
+
+  .cookie-banner__text {
+    flex: none;
+    font-size: 0.625rem;
+    line-height: 1.45;
+    max-height: 3.6rem;
+    overflow-y: auto;
+  }
+
+  .cookie-banner__actions {
+    width: 100%;
+    justify-content: stretch;
+    gap: 0.45rem;
+  }
+
+  .cookie-banner__btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.4rem 0.55rem;
+    font-size: 0.625rem;
+    min-height: 2rem;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 380px) {
+  .cookie-banner__text {
+    font-size: 0.5875rem;
+    max-height: 3.2rem;
+  }
+
+  .cookie-banner__btn {
+    font-size: 0.5875rem;
+    padding: 0.35rem 0.45rem;
+  }
+}
+
+</style>
     <script type="module" crossorigin src="/assets/index-CgtScmUm.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-Cmjyog-R.css">
     <link rel="stylesheet" href="/assets/site-custom.css?v=20260622">
