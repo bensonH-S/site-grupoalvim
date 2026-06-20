@@ -1,0 +1,17 @@
+{
+  "name": "site-grupoalvim",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "patch": "node scripts/apply-patches.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nodemailer": "^6.10.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

@@ -1,0 +1,12 @@
+const j = require("fs").readFileSync("assets/index-CgtScmUm.js", "utf8");
+const i = j.indexOf("vh=()=>");
+console.log(j.substring(i, i + 1800));
+console.log("\n--- OL ---");
+const ol = j.indexOf("OL=()=>");
+console.log(j.substring(ol, ol + 600));
+console.log("\n--- cL ---");
+const cl = j.indexOf("cL=()=>");
+console.log(j.substring(cl, cl + 400));
+console.log("\n--- history ---");
+const h = j.indexOf("site-history-media");
+console.log(j.substring(h - 80, h + 200));

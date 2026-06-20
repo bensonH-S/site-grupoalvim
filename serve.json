@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/sobre", "destination": "/index.html" },
+    { "source": "/franqueado", "destination": "/index.html" },
+    { "source": "/privacidade", "destination": "/privacidade.html" },
+    { "source": "/termos", "destination": "/termos.html" }
+  ]
+}
