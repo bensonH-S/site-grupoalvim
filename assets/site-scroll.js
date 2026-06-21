@@ -3,11 +3,12 @@
     history.scrollRestoration = "manual";
   }
 
+  var activeScrollTimer = null;
+  var activeScrollCleanup = null;
+
   function resolveScrollId(id) {
     if (!id) return id;
-    if (id === "nossa-historia") {
-      return "top";
-    }
+    if (id === "nossa-historia") return "top";
     return id;
   }
 
@@ -55,26 +56,92 @@
     return top <= offset + 16 && top >= offset - 48;
   }
 
+  function abortActiveScroll() {
+    if (activeScrollTimer) {
+      clearTimeout(activeScrollTimer);
+      activeScrollTimer = null;
+    }
+    if (activeScrollCleanup) {
+      activeScrollCleanup();
+      activeScrollCleanup = null;
+    }
+  }
+
   function runScroll() {
     var id = resolveScrollId(sessionStorage.getItem("ga-scroll"));
     if (!id) return;
 
+    abortActiveScroll();
+
     var tries = 0;
-    var timer = setInterval(function () {
+    var maxTries = 12;
+    var elementFound = false;
+    var userInterrupted = false;
+
+    function cleanup() {
+      activeScrollTimer = null;
+      activeScrollCleanup = null;
+      window.removeEventListener("wheel", onUserIntent, listenerOpts);
+      window.removeEventListener("touchstart", onUserIntent, listenerOpts);
+      window.removeEventListener("keydown", onUserIntent, listenerOpts);
+    }
+
+    var listenerOpts = { passive: true, capture: true };
+
+    function onUserIntent() {
+      if (tries > 0) {
+        userInterrupted = true;
+        sessionStorage.removeItem("ga-scroll");
+        cleanup();
+      }
+    }
+
+    function finish() {
+      sessionStorage.removeItem("ga-scroll");
+      cleanup();
+    }
+
+    function attempt() {
+      if (userInterrupted) return;
+
       tries++;
-      scrollToTarget(id);
+      var found = scrollToTarget(id);
+      if (found) elementFound = true;
 
       if (isAtTarget(id)) {
-        sessionStorage.removeItem("ga-scroll");
-        clearInterval(timer);
+        finish();
         return;
       }
 
-      if (tries >= 50) {
-        sessionStorage.removeItem("ga-scroll");
-        clearInterval(timer);
+      if (!elementFound && tries < maxTries) {
+        activeScrollTimer = setTimeout(attempt, tries <= 3 ? 40 : 100);
+        return;
       }
-    }, 120);
+
+      if (elementFound && tries >= 2) {
+        finish();
+        return;
+      }
+
+      if (tries >= maxTries) {
+        finish();
+        return;
+      }
+
+      activeScrollTimer = setTimeout(attempt, 100);
+    }
+
+    activeScrollCleanup = cleanup;
+    window.addEventListener("wheel", onUserIntent, listenerOpts);
+    window.addEventListener("touchstart", onUserIntent, listenerOpts);
+    window.addEventListener("keydown", onUserIntent, listenerOpts);
+
+    attempt();
+  }
+
+  function scheduleScrollAfterRoute() {
+    clearTimeout(window._gaRouteScrollT);
+    window._gaRouteScrollT = setTimeout(runScroll, 20);
   }
 
   window.gaRunScroll = runScroll;
@@ -84,8 +151,31 @@
   };
 
   window.gaResolveScrollId = resolveScrollId;
-
   window.gaScrollTo = scrollToTarget;
+
+  document.addEventListener(
+    "click",
+    function (ev) {
+      var link = ev.target.closest(
+        "nav a.site-nav-link, nav .site-mobile-nav a, .site-footer a[href]"
+      );
+      if (!link) return;
+
+      var href = link.getAttribute("href") || "";
+      if (!href || href.indexOf("http") === 0 || href.indexOf("mailto:") === 0) return;
+
+      var path = href.split("#")[0] || href;
+      if (path !== "/" && path !== "/sobre" && path !== "/franqueado") return;
+
+      setTimeout(function () {
+        var target = resolveScrollId(sessionStorage.getItem("ga-scroll"));
+        if (target === "top") {
+          window.scrollTo({ top: 0, behavior: "auto" });
+        }
+      }, 0);
+    },
+    true
+  );
 
   /* Nossa História — coluna de imagens = altura do texto (até "próximos anos") */
   var historyResizeObserver = null;
@@ -160,6 +250,9 @@
       if (document.querySelector(".nossa-historia-section")) {
         bindHistoryMediaSync();
       }
+      if (sessionStorage.getItem("ga-scroll")) {
+        scheduleScrollAfterRoute();
+      }
     });
     obs.observe(root, { childList: true, subtree: true });
   }
@@ -176,14 +269,15 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     watchHistorySection();
-    setTimeout(watchHistorySection, 300);
-    setTimeout(runScroll, 100);
-    setTimeout(runScroll, 500);
-    setTimeout(runScroll, 1200);
+    if (sessionStorage.getItem("ga-scroll")) {
+      scheduleScrollAfterRoute();
+    }
   });
 
   window.addEventListener("load", function () {
     bindHistoryMediaSync();
-    setTimeout(runScroll, 200);
+    if (sessionStorage.getItem("ga-scroll")) {
+      scheduleScrollAfterRoute();
+    }
   });
 })();

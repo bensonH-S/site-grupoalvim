@@ -9,7 +9,15 @@ html {
 @media (max-width: 767px) {
   html,
   body {
-    overscroll-behavior-y: none;
+    overscroll-behavior-y: auto;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #root,
+  #root > .min-h-screen {
+    overflow: visible !important;
+    height: auto !important;
   }
 }
 

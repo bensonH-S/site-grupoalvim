@@ -87,7 +87,7 @@ const replacements = [
   ],
   [
     'u.to===s.pathname?setTimeout(p,250):null};return m.jsxs("nav"',
-    'if(u.to===s.pathname){setTimeout(p,250)}else if(u.scroll){setTimeout(function(){window.gaRunScroll&&window.gaRunScroll()},350);setTimeout(function(){window.gaRunScroll&&window.gaRunScroll()},900)}};return m.jsxs("nav"',
+    'if(u.to===s.pathname){p()}else if(u.scroll){window.scrollTo({top:0,behavior:"auto"});window.gaRunScroll&&window.gaRunScroll()}};return m.jsxs("nav"',
   ],
   [
     'S.useEffect(function(){window.gaRunScroll&&window.gaRunScroll();setTimeout(function(){window.gaRunScroll&&window.gaRunScroll()},500);setTimeout(function(){window.gaRunScroll&&window.gaRunScroll()},1200)},[]);return m.jsxs("div",{className:"min-h-screen",children:[m.jsx(vh,{}),m.jsxs("section",{className:"relative min-h-[80vh]',
@@ -95,7 +95,7 @@ const replacements = [
   ],
   [
     'const p=()=>{if(u.scroll==="top")window.scrollTo({top:0,behavior:"smooth"});else if(u.scroll){const v=document.getElementById(u.scroll);v&&v.scrollIntoView({behavior:"smooth",block:"start"});sessionStorage.removeItem("ga-scroll")}}',
-    'const p=()=>{if(u.scroll==="top"){window.scrollTo({top:0,behavior:"smooth"});sessionStorage.removeItem("ga-scroll")}else if(u.scroll){sessionStorage.setItem("ga-scroll",u.scroll);window.gaRunScroll&&window.gaRunScroll()}}',
+    'const p=()=>{if(u.scroll==="top"){window.scrollTo({top:0,behavior:"auto"});sessionStorage.removeItem("ga-scroll")}else if(u.scroll){sessionStorage.setItem("ga-scroll",u.scroll);window.gaRunScroll&&window.gaRunScroll()}}',
   ],
   [
     'm.jsx("button",{undefined})',
