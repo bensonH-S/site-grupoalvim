@@ -3,6 +3,14 @@
     history.scrollRestoration = "manual";
   }
 
+  function resolveScrollId(id) {
+    if (!id) return id;
+    if (id === "nossa-historia") {
+      return "top";
+    }
+    return id;
+  }
+
   function getHeaderOffset() {
     var nav = document.querySelector("nav");
     if (nav) {
@@ -12,6 +20,8 @@
   }
 
   function scrollToTarget(id) {
+    id = resolveScrollId(id);
+
     if (id === "top") {
       window.scrollTo({ top: 0, behavior: "auto" });
       return true;
@@ -32,6 +42,8 @@
   }
 
   function isAtTarget(id) {
+    id = resolveScrollId(id);
+
     if (id === "top") return window.scrollY < 20;
 
     var el = document.getElementById(id);
@@ -44,7 +56,7 @@
   }
 
   function runScroll() {
-    var id = sessionStorage.getItem("ga-scroll");
+    var id = resolveScrollId(sessionStorage.getItem("ga-scroll"));
     if (!id) return;
 
     var tries = 0;
@@ -71,21 +83,107 @@
     if (id) sessionStorage.setItem("ga-scroll", id);
   };
 
+  window.gaResolveScrollId = resolveScrollId;
+
   window.gaScrollTo = scrollToTarget;
+
+  /* Nossa História — coluna de imagens = altura do texto (até "próximos anos") */
+  var historyResizeObserver = null;
+  var historyResizeListener = false;
+
+  function syncHistoryMediaHeight() {
+    var section = document.querySelector(".nossa-historia-section");
+    if (!section) return;
+
+    var textCol = section.querySelector(".history-text-col");
+    var media = section.querySelector(".site-history-media");
+    if (!textCol || !media) return;
+
+    if (window.innerWidth < 768) {
+      media.style.height = "";
+      media.style.maxHeight = "";
+      return;
+    }
+
+    var height = Math.ceil(textCol.getBoundingClientRect().height);
+    media.style.height = height + "px";
+    media.style.maxHeight = height + "px";
+  }
+
+  function bindHistoryMediaSync() {
+    var section = document.querySelector(".nossa-historia-section");
+    if (!section) return;
+
+    var textCol = section.querySelector(".history-text-col");
+    if (!textCol) return;
+
+    syncHistoryMediaHeight();
+
+    if (typeof ResizeObserver !== "undefined") {
+      if (!historyResizeObserver) {
+        historyResizeObserver = new ResizeObserver(function () {
+          syncHistoryMediaHeight();
+        });
+      }
+      historyResizeObserver.disconnect();
+      historyResizeObserver.observe(textCol);
+    }
+
+    if (!historyResizeListener) {
+      historyResizeListener = true;
+      window.addEventListener(
+        "resize",
+        function () {
+          clearTimeout(window._gaHistorySyncT);
+          window._gaHistorySyncT = setTimeout(syncHistoryMediaHeight, 100);
+        },
+        { passive: true }
+      );
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(syncHistoryMediaHeight);
+      }
+    }
+  }
+
+  var historyMutationObserved = false;
+
+  function watchHistorySection() {
+    bindHistoryMediaSync();
+
+    if (historyMutationObserved) return;
+
+    var root = document.getElementById("root");
+    if (!root || typeof MutationObserver === "undefined") return;
+
+    historyMutationObserved = true;
+    var obs = new MutationObserver(function () {
+      if (document.querySelector(".nossa-historia-section")) {
+        bindHistoryMediaSync();
+      }
+    });
+    obs.observe(root, { childList: true, subtree: true });
+  }
+
+  window.gaSyncHistoryMedia = syncHistoryMediaHeight;
 
   if (window.location.hash) {
     var legacyId = window.location.hash.replace("#", "");
-    if (legacyId) sessionStorage.setItem("ga-scroll", legacyId);
+    if (legacyId) {
+      sessionStorage.setItem("ga-scroll", legacyId);
+    }
     history.replaceState(null, "", window.location.pathname + window.location.search);
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    watchHistorySection();
+    setTimeout(watchHistorySection, 300);
     setTimeout(runScroll, 100);
     setTimeout(runScroll, 500);
     setTimeout(runScroll, 1200);
   });
 
   window.addEventListener("load", function () {
+    bindHistoryMediaSync();
     setTimeout(runScroll, 200);
   });
 })();

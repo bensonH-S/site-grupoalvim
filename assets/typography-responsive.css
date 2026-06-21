@@ -1,61 +1,134 @@
 /*
- * Tipografia em camadas (estilo MUI xs / md / lg / xl)
- * Teto global em todos os breakpoints — dev e produção com os mesmos limites.
- * lg 1280–1535 → desktop
- * md 1024–1279 → notebook
+ * Tipografia fluida por breakpoint (MUI-style)
+ * xl 1536+     → monitores grandes (14"–24", escala com vw)
+ * lg 1280–1535 → notebook 13"/14" e desktop compacto
+ * md 1024–1279 → notebook menor
  * sm 768–1023  → tablet
- * xs ≤767      → mobile (overrides.css)
+ * xs ≤767      → mobile
  */
 #root {
-  --hero-h1: clamp(1.9rem, 1.15rem + 1.55vw, 2.85rem);
-  --section-display: clamp(1.7rem, 1rem + 1.35vw, 2.5rem);
-  --section-h2: clamp(1.5rem, 0.9rem + 1.1vw, 2.15rem);
-  --section-h3: clamp(1.25rem, 0.75rem + 0.65vw, 1.65rem);
-  --stat-number: clamp(1.45rem, 0.85rem + 0.85vw, 2rem);
-  --text-lg-size: 1.0625rem;
-  --text-body: 0.9375rem;
+  --hero-h1: clamp(2rem, 1.15rem + 2.1vw, 3.75rem);
+  --section-display: clamp(1.75rem, 0.95rem + 1.75vw, 3.25rem);
+  --section-h2: clamp(1.5rem, 0.8rem + 1.2vw, 2.5rem);
+  --section-h3: clamp(1.2rem, 0.65rem + 0.75vw, 1.85rem);
+  --stat-number: clamp(1.5rem, 0.85rem + 1vw, 2.5rem);
+  --text-lg-size: clamp(1rem, 0.92rem + 0.15vw, 1.125rem);
+  --text-body: clamp(0.9375rem, 0.88rem + 0.1vw, 1.0625rem);
+  --btn-cta: clamp(0.75rem, 0.68rem + 0.12vw, 0.875rem);
 }
 
 @media (max-width: 1535px) {
   #root {
-    --hero-h1: clamp(1.9rem, 1.15rem + 1.55vw, 2.85rem);
-    --section-display: clamp(1.7rem, 1rem + 1.35vw, 2.5rem);
-    --section-h2: clamp(1.5rem, 0.9rem + 1.1vw, 2.15rem);
-    --section-h3: clamp(1.25rem, 0.75rem + 0.65vw, 1.65rem);
-    --stat-number: clamp(1.45rem, 0.85rem + 0.85vw, 2rem);
-    --text-lg-size: 1.0625rem;
-    --text-body: 0.9375rem;
+    --hero-h1: clamp(1.65rem, 0.88rem + 1.22vw, 2.35rem);
+    --section-display: clamp(1.42rem, 0.74rem + 1.05vw, 2rem);
+    --section-h2: clamp(1.25rem, 0.62rem + 0.85vw, 1.68rem);
+    --section-h3: clamp(1.08rem, 0.52rem + 0.5vw, 1.32rem);
+    --stat-number: clamp(1.1rem, 0.58rem + 0.6vw, 1.5rem);
+    --text-lg-size: 0.9375rem;
+    --text-body: 0.875rem;
+    --btn-cta: 0.75rem;
   }
 }
 
 @media (max-width: 1279px) {
   #root {
-    --hero-h1: clamp(1.55rem, 0.85rem + 1.45vw, 2.15rem);
-    --section-display: clamp(1.45rem, 0.75rem + 1.2vw, 2rem);
-    --section-h2: clamp(1.3rem, 0.65rem + 1vw, 1.75rem);
-    --section-h3: clamp(1.1rem, 0.55rem + 0.55vw, 1.35rem);
-    --stat-number: clamp(1.25rem, 0.65rem + 0.7vw, 1.65rem);
-    --text-lg-size: 1rem;
-    --text-body: 0.9rem;
+    --hero-h1: clamp(1.55rem, 0.78rem + 1.08vw, 2.15rem);
+    --section-display: clamp(1.32rem, 0.64rem + 0.92vw, 1.82rem);
+    --section-h2: clamp(1.15rem, 0.55rem + 0.72vw, 1.55rem);
+    --section-h3: clamp(1rem, 0.45rem + 0.44vw, 1.22rem);
+    --stat-number: clamp(1.05rem, 0.52rem + 0.55vw, 1.35rem);
+    --text-lg-size: 0.9rem;
+    --text-body: 0.8125rem;
+    --btn-cta: 0.72rem;
   }
 }
 
 @media (max-width: 1023px) {
   #root {
-    --hero-h1: clamp(1.45rem, 0.7rem + 1.35vw, 1.9rem);
-    --section-display: clamp(1.35rem, 0.65rem + 1.1vw, 1.85rem);
-    --section-h2: clamp(1.2rem, 0.55rem + 0.9vw, 1.55rem);
-    --section-h3: clamp(1.05rem, 0.45rem + 0.5vw, 1.25rem);
-    --stat-number: clamp(1.15rem, 0.55rem + 0.6vw, 1.45rem);
-    --text-lg-size: 0.9375rem;
-    --text-body: 0.875rem;
+    --hero-h1: clamp(1.35rem, 0.65rem + 1.2vw, 1.75rem);
+    --section-display: clamp(1.2rem, 0.55rem + 1vw, 1.6rem);
+    --section-h2: clamp(1.05rem, 0.45rem + 0.85vw, 1.4rem);
+    --section-h3: clamp(0.95rem, 0.4rem + 0.45vw, 1.15rem);
+    --stat-number: clamp(1.05rem, 0.5rem + 0.55vw, 1.35rem);
+    --text-lg-size: 0.875rem;
+    --text-body: 0.8125rem;
+    --btn-cta: 0.7rem;
+  }
+
+  #root section.py-24,
+  #root section.py-20,
+  #root section.py-24.md\:py-36 {
+    padding-top: 2.75rem !important;
+    padding-bottom: 2.75rem !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #root {
+    --hero-h1: clamp(1.15rem, 4.8vw + 0.4rem, 1.5rem);
+    --section-display: clamp(1.05rem, 3.8vw + 0.35rem, 1.3rem);
+    --section-h2: clamp(0.95rem, 3.2vw + 0.3rem, 1.2rem);
+    --section-h3: clamp(0.875rem, 2vw + 0.25rem, 1rem);
+    --stat-number: clamp(0.95rem, 3.5vw + 0.3rem, 1.25rem);
+    --text-lg-size: 0.8125rem;
+    --text-body: 0.75rem;
+    --btn-cta: 0.65rem;
+  }
+
+  #root section.py-24,
+  #root section.py-20,
+  #root section.py-24.md\:py-36 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  #root .premium-card,
+  #root .group.bg-card.rounded-3xl {
+    padding: 1rem !important;
+  }
+
+  #root #inicio p.text-sm,
+  #root #inicio p.md\:text-lg,
+  #root #inicio p {
+    font-size: 0.8125rem !important;
+    max-width: 22rem;
+  }
+
+  #root .text-center.mb-16,
+  #root .text-center.mb-20,
+  #root section .text-center.mb-16,
+  #root section .text-center.mb-20 {
+    margin-bottom: 1.25rem !important;
+  }
+
+  #root .premium-card > div.w-14,
+  #root .group.bg-card.rounded-3xl > div.w-14 {
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    min-width: 2.25rem !important;
+    min-height: 2.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #root .premium-card > div.w-14 svg,
+  #root .group.bg-card.rounded-3xl > div.w-14 svg {
+    width: 1.125rem !important;
+    height: 1.125rem !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #root .nossa-historia-section h2 {
+    font-size: clamp(1.22rem, 5.2vw + 0.4rem, 1.48rem) !important;
+    line-height: 1.15 !important;
   }
 }
 
 #root #inicio h1,
 #root #inicio h1.font-display,
 #root #inicio h1.lg\:text-7xl,
-#root #inicio h1.md\:text-6xl {
+#root #inicio h1.md\:text-6xl,
+#root #inicio h1.sm\:text-5xl {
   font-size: var(--hero-h1) !important;
   line-height: 1.1 !important;
 }
@@ -70,6 +143,7 @@
 
 #root h2.text-3xl,
 #root h2.md\:text-5xl,
+#root h2.md\:text-4xl,
 #root .text-3xl.md\:text-5xl,
 #root h1.text-4xl,
 #root h1.md\:text-6xl,
@@ -109,60 +183,92 @@
   font-size: var(--text-lg-size) !important;
 }
 
+#root .nossa-historia-section p,
+#root .nossa-historia-section .text-\[16px\] {
+  font-size: var(--text-body) !important;
+  line-height: 1.65 !important;
+}
+
 #root .premium-card p,
 #root .premium-card ul li,
-#root .nossa-historia-section p,
 #root .site-timeline-card p,
 #root .text-\[15px\] {
   font-size: var(--text-body) !important;
 }
 
-/* Layout compacto — só abaixo de xl (monitores grandes mantêm espaçamento original) */
-@media (max-width: 1535px) {
+/* Hero — badge e botões proporcionais ao breakpoint */
+#root #inicio .inline-flex.items-center.gap-2 p,
+#root #inicio .text-\[10px\],
+#root #inicio .text-\[10px\].md\:text-xs {
+  font-size: clamp(0.55rem, 0.48rem + 0.12vw, 0.6875rem) !important;
+}
+
+#root #inicio a.rounded-full {
+  font-size: var(--btn-cta) !important;
+  padding: clamp(0.45rem, 0.35rem + 0.25vw, 0.65rem) clamp(0.85rem, 0.65rem + 0.5vw, 1.35rem) !important;
+}
+
+#root #inicio a.rounded-full svg {
+  width: clamp(12px, 0.75rem + 0.15vw, 16px) !important;
+  height: clamp(12px, 0.75rem + 0.15vw, 16px) !important;
+}
+
+#root #inicio a.border-b,
+#root #inicio .flex.flex-wrap.items-center.gap-4 > a:not(.rounded-full) {
+  font-size: var(--btn-cta) !important;
+}
+
+/* Notebooks 14"–20" (1024–1919px) — títulos um pouco maiores que o compacto padrão */
+@media (min-width: 1024px) and (max-width: 1919px) {
+  #root {
+    --hero-h1: clamp(1.75rem, 0.95rem + 1.35vw, 2.55rem);
+    --section-display: clamp(1.5rem, 0.82rem + 1.15vw, 2.25rem);
+    --section-h2: clamp(1.32rem, 0.68rem + 0.92vw, 1.78rem);
+    --section-h3: clamp(1.12rem, 0.55rem + 0.52vw, 1.38rem);
+    --stat-number: clamp(1.25rem, 0.65rem + 0.75vw, 1.85rem);
+  }
+}
+
+/* Layout compacto — notebooks e tablets (mobile tem regras próprias) */
+@media (min-width: 768px) and (max-width: 1535px) {
   #root section.py-24,
   #root section.py-20,
   #root section.py-24.md\:py-36 {
-    padding-top: 3.5rem !important;
-    padding-bottom: 3.5rem !important;
+    padding-top: clamp(2.5rem, 1.5rem + 2vw, 3.25rem) !important;
+    padding-bottom: clamp(2.5rem, 1.5rem + 2vw, 3.25rem) !important;
   }
 
   #root #inicio p.text-sm,
   #root #inicio p.md\:text-lg,
   #root #inicio p {
     font-size: var(--text-lg-size) !important;
-    max-width: 32rem;
+    max-width: 28rem;
+  }
+
+  #root #inicio h1 {
+    margin-bottom: clamp(0.75rem, 0.5rem + 0.5vw, 1.25rem) !important;
   }
 }
 
-@media (max-width: 1279px) {
+@media (min-width: 768px) and (max-width: 1279px) {
   #root .premium-card,
   #root .group.bg-card.rounded-3xl {
-    padding: 1.5rem !important;
+    padding: 1.25rem !important;
   }
 }
 
-@media (max-width: 1023px) {
-  #root #inicio .inline-flex.items-center.gap-2 p {
-    font-size: 0.625rem !important;
-    letter-spacing: 0.26em !important;
+@media (min-width: 1536px) {
+  #root section.py-24,
+  #root section.py-20,
+  #root section.py-24.md\:py-36 {
+    padding-top: clamp(3.5rem, 2rem + 2.5vw, 5.5rem) !important;
+    padding-bottom: clamp(3.5rem, 2rem + 2.5vw, 5.5rem) !important;
   }
 
-  #root #inicio a.rounded-full {
-    font-size: 0.75rem !important;
-    padding: 0.65rem 1.25rem !important;
-  }
-}
-
-/* Nossa História — telas grandes (levemente maior que o padrão) */
-@media (min-width: 1280px) {
-  #root .nossa-historia-section h2 {
-    font-size: clamp(1.85rem, 1.05rem + 0.95vw, 2.25rem) !important;
-    line-height: 1.15 !important;
-  }
-
-  #root .nossa-historia-section p,
-  #root .nossa-historia-section .text-\[16px\] {
-    font-size: clamp(1rem, 0.92rem + 0.12vw, 1.0625rem) !important;
-    line-height: 1.7 !important;
+  #root #inicio p.text-sm,
+  #root #inicio p.md\:text-lg,
+  #root #inicio p {
+    font-size: var(--text-lg-size) !important;
+    max-width: 36rem;
   }
 }

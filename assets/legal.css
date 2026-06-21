@@ -34,10 +34,19 @@
 }
 
 .legal-header__logo {
-  height: 3rem;
+  height: 2.65rem;
   width: auto;
-  max-width: 180px;
+  max-width: 168px;
   object-fit: contain;
+  object-position: left center;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .legal-header__logo {
+    height: 3.25rem;
+    max-width: 200px;
+  }
 }
 
 .legal-header__back {
@@ -132,11 +141,6 @@
     gap: 0.4rem 0.65rem;
   }
 
-  .legal-header__logo {
-    height: 2rem;
-    max-width: 115px;
-  }
-
   .legal-header__back {
     font-size: 0.6875rem;
     margin-left: auto;
@@ -195,6 +199,11 @@
 }
 
 @media (max-width: 380px) {
+  .legal-header__logo {
+    height: 2.4rem;
+    max-width: 152px;
+  }
+
   .legal-header__inner {
     flex-direction: column;
     align-items: flex-start;

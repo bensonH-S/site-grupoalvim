@@ -98,7 +98,8 @@ const replacements = [
     'const p=()=>{if(u.scroll==="top"){window.scrollTo({top:0,behavior:"smooth"});sessionStorage.removeItem("ga-scroll")}else if(u.scroll){sessionStorage.setItem("ga-scroll",u.scroll);window.gaRunScroll&&window.gaRunScroll()}}',
   ],
   [
-    'type:"submit",disabled:l,className:"w-full bg-primary text-primary-foreground py-4 rounded-full text-sm font-semibold uppercase tracking-wider hover:brightness-110 hover:scale-[1.02] transition-all duration-300 disabled:opacity-60 disabled:pointer-events-none",children:l?"Enviando...":"Enviar Formulário"',
+    'm.jsx("button",{undefined})',
+    'm.jsx("button",{type:"submit",disabled:l,className:"w-full bg-primary text-primary-foreground py-4 rounded-full text-sm font-semibold uppercase tracking-wider hover:brightness-110 hover:scale-[1.02] transition-all duration-300 disabled:opacity-60 disabled:pointer-events-none",children:l?"Enviando...":"Enviar Formulário"})',
   ],
 ];
 
